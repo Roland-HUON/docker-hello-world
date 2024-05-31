@@ -1,16 +1,7 @@
-FROM debian:9
+FROM openclassrooms/build_image
 
-RUN apt-get update -yq \
-&& apt-get install curl gnupg -yq \
-&& curl -sL https://deb.nodesource.com/setup_10.x | bash \
-&& apt-get install nodejs -yq \
-&& apt-get clean -y
+RUN ap update \
+&& apt-get upgrade -y \
+&& apt-get install nginx -y
 
-ADD . /app/
-WORKDIR /app
-RUN npm install
-
-EXPOSE 2368
-VOLUME /app/logs
-
-CMD npm run start
+CMD ["nginx", "-g", "daemon off;"]
